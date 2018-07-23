@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div id="main-container" class="container justify-content-xs-center">
+    <div id="color-mapping" class="container border">
+        <div class="row justify-content-xs-center">
+            {% for char in characters %}
+            <div id="char-{{ char }}" class="col-xs-auto border colormap">
+                <label>{{ char }}</label>
+                <input type="color" id="color-{{ char }}">
+            </div>
+            {% if loop.index0 > 0 and (loop.index0 + 1) % 6 == 0 %}
+        </div>
+        <div class="row justify-content-xs-center">
+            {% endif %}
+            {% endfor %}
+        </div>
+        <div class="row">
+            <button id="color-save" onclick="save_mapping(get_mapping());">SAVE</button>
+            <button id="color-load" onclick="load_mapping();">LOAD</button>
+            <button id='color-copy' onclick="copy_mapping_to_clipboard(get_mapping());">CLIPBOARD</button>
+        </div>
+    </div>
+    <div id="transformer" class="container border">
+        <div class="form-group">
+            <textarea class="form-control" rows="25" id="textbox"></textarea>
+            <button id="submit" onclick="transform(get_text(), get_mapping());">TRANSFORM</button>
+        </div>
+    </div>
+    <div id="output"></div>
+</div>
+{% endblock %}
